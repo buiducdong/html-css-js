@@ -35,8 +35,14 @@
                     <li>
                         <a href="#">Work</a>
                     </li>
-                    <li>
-                        <a href="#">Project Of My</a>
+                    <li class="list__myproject">
+                        <a class="list__myproject-text" href="#">Project Of My</a>
+                        <ul class="list__down">
+                            <li class="list__down-text">aaaa</li>
+                            <li class="list__down-text">bbbb</li>
+                            <li class="list__down-text">cbbb</li>
+                            <li class="list__down-text">ddddd</li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">Contact</a>
@@ -146,6 +152,18 @@
             console.log(i)
             setTimeout(() => console.log(i));
         }
+
+
+        const navSlide = () => {
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('.nav-active');
+        });
+    }
+
+        navSlide();
     </script>
 </body>
 </html>
