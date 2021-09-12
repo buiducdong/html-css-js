@@ -50,6 +50,10 @@
     } 
 }
 @media screen and (max-width: 768px) {
+    
+    body{
+        overflow-x: hidden;
+    }
     .header-lists .nav-links{
         position: absolute;
         top: 60px;
@@ -62,6 +66,7 @@
         z-index: 10;
         width: 50%;
         justify-content: unset;
+        transform: translateX(100%);
     } 
     .header-lists .nav-links li{
         padding: 10px 20px;
