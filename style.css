@@ -9,16 +9,11 @@
     background-color: aqua;
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
-}
-.header > .wide {
-    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
-    margin: 0 auto;
 }   
-.wide > .logo {
+.logo {
     text-transform: uppercase;
 }
 .header-lists {
@@ -142,7 +137,7 @@
 
 /* toast */
 .btnGroup{
-    max-width: 600px;
+    max-width: 300px;
     margin:20px auto;
 }
 
@@ -225,92 +220,5 @@
 }
 
 
-/* code dropdow */
-.footer {
-    margin-top: 40px; 
-}
-
-.dropdown {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.dropdown .dropdown__select{
-    width: 100%;
-    background-color: brown;
-    padding: 20px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 20px;
-    text-transform: uppercase;
-    align-items: center;
-}
-.dropdown__select:hover .dropdown__lists {
-    display: block;
-}
-
-.dropdown__lists {
-    position: absolute;
-    top: 100%;
-    background-color: transparent;
-    left: 0;
-    right: 0;
-    margin-top: 10px;
-    display: none;
-}
-.dropdown:hover .dropdown__lists {
-    display: block;
-}
-.dropdown__lists::before {
-    content: "";
-    position: absolute;
-    height: 30px;
-    left: 0;
-    right: 0;
-    background-color: transparent;
-    transform: translateY(-100%);
-
-}
-.dropdown__item {
-    list-style-type: none;
-    cursor: pointer;
-    transition: background-color .2s linear;
-    padding: 10px 10px;
-    display: flex;
-    background-color: brown;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 20px;
-    text-transform: uppercase;
-    align-items: center;
-}
-.dropdown__item:first-child {
-    border-radius: 4px 4px 0 0 ;
-    position: relative;
-}
-.dropdown__item:first-child:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 10px;
-    border-bottom: 10px solid brown;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-    transform: translateY(-100%);
-}
-.dropdown__item:first-child:hover:before {
-    border-bottom-color: aqua;
-}
-.dropdown__item:last-child {
-    border-radius: 0px 0px 4px 4px ;
-}
-
-.dropdown__item:hover {
-    background-color: aqua;
-}
 
 
