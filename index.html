@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <!-- <link rel="stylesheet" href="./grid.css"> -->
+    <title>HTML-CSS</title>
+    <style>
+        .container{
+            background-color: aquamarine;
+        }
+        h1{
+            padding: 100px 0;
+            text-align: center;
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="wide">
+            <div class="logo"><h2>MyLogo</h2></div>
+            <div class="header-lists">
+                <ul class="nav-links">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Work</a>
+                    </li>
+                    <li>
+                        <a href="#">Project Of My</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="btnGroup">
+        <div onclick="showSuccessToast();" class="btn btn--success">Success</div>
+        <div onclick="showErrorToast();"class="btn btn--warn">Error</div>
+    </div>
+    <div id="toast">
+    </div>
+    <div class="footer">
+        <div class="dropdown">
+            <div class="dropdown__select">
+                <span class="dropdown__selected">hello</span>
+                <i>a</i>
+            </div>
+            <div class="dropdown__lists">
+                <ul>
+                    <li class="dropdown__item">
+                        <span class="dropdow__text">ok luoon</span>
+                        <i>a</i>
+                    </li>
+                    <li class="dropdown__item">
+                        <span class="dropdow__text">ok luoon</span>
+                        <i>a</i>
+                    </li>
+                    <li class="dropdown__item">
+                        <span class="dropdow__text">ok luoon</span>
+                        <i>a</i>
+                    </li>
+                    <li class="dropdown__item">
+                        <span class="dropdow__text">ok luoon</span>
+                        <i>a</i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        function  toast({title = '',icon='', message = '', type = 'info', duration=3000}) {
+            const main = document.getElementById('toast');
+            if(main) {
+                const toast = document.createElement('div');
+
+                const autoRemove = setTimeout(function() {
+                    main.removeChild(toast);
+                }, duration + 1000);
+
+                toast.onclick = function(e) {
+                    if(e.target.closest('.close')) {
+                        main.removeChild(toast);
+                        clearTimeout(autoRemove);
+                    }
+                }
+                const deley = (duration / 1000).toFixed(2);
+                toast.classList.add('toast', `toast__${type}`);
+                toast.style.animation = `rightToLeft ease .5s, fadeOut linear 1s ${deley}s forwards`;
+                toast.innerHTML = `
+                <div class="icon">
+                    <h5>${icon}</h5>
+                </div>
+                <div class="body">
+                    <h2>${title}</h2>
+                    <p>${message}</p>
+                </div>
+                <div class="close">
+                    <p>close</p>
+                </div>
+                `;
+                main.appendChild(toast)
+            
+            }
+        }
+
+
+        function showSuccessToast() {
+            toast({
+                title: 'Success',
+                message: 'ket noi thanh cong',
+                icon:'ss',
+                type: 'ss',
+                duration: 1000
+            })
+        }
+        function showErrorToast() {
+            toast({
+                title: 'Error',
+                message: 'ket noi that bai',
+                icon:'err',
+                type: 'err',
+                duration: 3000
+            })
+        }
+        var i =0;
+        for(; i < 3; ++i) {
+            console.log(i)
+            setTimeout(() => console.log(i));
+        }
+    </script>
+</body>
+</html>
