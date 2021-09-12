@@ -39,12 +39,147 @@
     background-color: white;
 }
 
+.nav-active {
+    transform: translateX(0%);
+}
+
+@keyframes navLinkFadeOut {
+    from{
+        opacity: 0;
+        transform: translateX(80%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+.toggle .line1 {
+    transform:  rotate(-45deg) translate(-5px, 6px);
+}
+.toggle .line2 {
+    opacity: 0;
+}
+.toggle .line3 {
+    transform:  rotate(45deg) translate(-5px, -6px);
+}
+
+.cards {
+    --spacing: 30px;
+    --columns:4;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing));
+    padding-top: 20px;
+}
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    margin-left: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.card-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.card-top {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.card-title {
+    font-weight: 300;
+    margin-bottom: 25px;
+    word-break: break-all;
+
+    /* gioi han 2 dong text */
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+.card-user {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+.card-user-avata {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 200px;
+    flex-shrink: 0;
+}
+.card-user-info {
+    padding-left: 20px;
+    flex: 1;
+}
+.card-user-top {
+    display: flex;
+    align-items: center;
+}
+.card-user-top ion-icon {
+    color: #20e3b2;
+    margin-left: 5px;
+}
+.cad-user-name {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+}
+.card-user-game {
+    color: #999;
+    font-weight: 300;
+    font-size: 14px;
+}
+.card-bottom {
+    padding: 25px;
+    border-top: 1px solid rgb(109, 107, 107);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+.card-live {
+    background-color: red;
+    border-radius: 14px;
+    padding: 6px 12px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.card-live span {
+    margin-left: 8px;
+}
+.card-watching {
+    margin-left: 20px;
+    color: #999;
+    font-weight: 300;
+}
+.card-content {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+
+
 @media screen and (max-width: 1023px) {
     .nav-links {
-        width: 55%;
+        width: 60%;
     } 
+    .cards {
+       --columns: 3;
+    }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     
     body{
         overflow-x: hidden;
@@ -65,7 +200,9 @@
         transition: transform .5s ease-in;
     } 
     .nav-links li{
-        padding: 10px 20px;
+        padding: 20px 20px;
+        opacity: 0;
+        
     }
     .nav-links li:hover {
         background-color: white;
@@ -76,62 +213,7 @@
         display: block;
         cursor: pointer;
     }
+    .cards {
+        --columns:2;
+    }
 }
-.nav-active {
-    transform: translateX(0%);
-}
-
-.list__myproject {
-    position: relative;
-}
-.list__myproject:hover .list__down {
-    display: block;
-}
-.list__myproject-text {
-
-}
-.list__down {
-    position: absolute;
-    top: 40px;
-    background-color: aqua;
-    width: 100%;
-    display: none;
-}
-.list__down::before {
-    content: "";
-    height: 20px;
-    background-color: transparent;
-    left: 0;
-    right: 0;
-    position: absolute;
-    transform: translateY(-100%);
-
-}
-.list__down-text {
-    list-style-type: none;
-    border-bottom: 1px solid rgb(0, 255, 136);
-    position: relative;
-    line-height: 40px;
-}
-.list__down-text:first-child:before {
-    position: absolute;
-    content: "";
-    border-bottom: 10px solid rgb(0, 255, 136);;
-    transform: translateY(-100%);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    z-index: 1000;
-}
-.list__down-text:hover {
-    opacity: 0.7;
-    background-color: rgb(0, 255, 136);
-    cursor: pointer;
-}
-.list__down-text:first-child:hover::before {
-    border-bottom-color: aqua;
-}
-
-
-
-
-
