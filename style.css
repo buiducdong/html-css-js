@@ -68,7 +68,7 @@
     }
     .header-lists .nav-links li:hover {
         background-color: white;
-        border-radius: 5px;
+        border-radius: 6px;
     }
     .burger {
         display: block;
