@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.body {
+    position: relative;
+}
 .header {
     height: 60px;
     background-color: aqua;
@@ -39,9 +41,7 @@
     background-color: white;
 }
 
-.nav-active {
-    transform: translateX(0%);
-}
+
 
 @keyframes navLinkFadeOut {
     from{
@@ -69,7 +69,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-left: calc(-1 * var(--spacing));
-    padding-top: 20px;
+    padding: 20px 20px;
 }
 .card {
     border-radius: 20px;
@@ -176,7 +176,7 @@
         width: 60%;
     } 
     .cards {
-       --columns: 3;
+       --columns: 2;
     }
 }
 @media screen and (max-width: 767px) {
@@ -197,7 +197,7 @@
         width: 50%;
         justify-content: unset;
         transform: translateX(100%);
-        transition: transform .5s ease-in;
+        transition: transform 1s ease-in;
     } 
     .nav-links li{
         padding: 20px 20px;
@@ -214,6 +214,9 @@
         cursor: pointer;
     }
     .cards {
-        --columns:2;
+        --columns:1;
     }
+}
+.nav-active {
+    transform: translateX(0%);
 }
