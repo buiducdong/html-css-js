@@ -183,6 +183,7 @@
     
     body{
         overflow-x: hidden;
+        position: relative;
     }
     .nav-links{
         position: absolute;
