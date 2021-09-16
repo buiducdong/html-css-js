@@ -1,3 +1,4 @@
+
 const navSlide = () => {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
@@ -23,3 +24,83 @@ const navSlide = () => {
 }
 
 navSlide();
+
+
+
+var fakeApi = "http://localhost:3000/content"
+
+function start() {
+    getContent((contents) => {
+        renderContent(contents)
+    });
+    handleForm();
+}
+start();
+
+function getContent(callback) {
+    fetch(fakeApi)
+        .then((api) => {
+            return api.json()
+        })
+        .then(callback);
+}
+
+function createContetn(data) {
+    fetch(fakeApi,{
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then((api) => {
+        return api.json()
+    })
+    .then(getContent((contents) => {
+        renderContent(contents)
+    }))
+}
+
+function renderContent(contents) {
+    const listContent = document.getElementById('listContent')
+    const content = contents.map((content) => {
+        return `<li class = "item-${content.id}">
+        <h4>${content.content} - ${content.date}</h4>
+        <button onclick="deleteContent(${content.id})" style="margin-left: 20px;cursor: pointer; background-color: red; border-radius: 4px; padding: 4px 4px">delete</button>
+        </li>`
+    })
+    listContent.innerHTML = content;
+}
+
+function deleteContent(id) {
+    fetch(fakeApi + '/' + id,{
+        method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    })
+    .then((api ) => {
+        return api.json()
+    })
+    .then(function() {
+        const item = document.querySelector('.item-' + id)
+        if(item) {
+            item.remove();
+        }
+    })
+}
+ 
+function handleForm() {
+    var addBtn = document.querySelector('#add');
+    addBtn.onclick = function() {
+        var content = document.querySelector('input[name="content"]').value;
+        var date = document.querySelector('input[name="date"]').value;
+        
+        var formData = {
+            content: content,
+            date: date
+        }
+
+        createContetn(formData)
+    }
+}
