@@ -188,6 +188,102 @@
 }
 
 
+/* todo list app */
+
+.tasker.wide {
+    max-width: 400px;
+    margin: 0 auto;
+    min-height: 200px;
+    background-color: #1dd2af;
+  
+  }
+  #error {
+    display: none;
+    background: rgba(237, 28, 36, 0.7);
+    color: #fff;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }  
+  .tasker ul {
+    background: #fff;
+  }
+
+  .tasker-header {
+    display: inline-flex;
+    background: #313e50;
+    justify-content: space-between;
+    width: 100%;
+  
+  }
+  .tasker-header input {
+    flex-grow: 2;
+  }
+  .tasker-header button {
+    transition: all 0.4s ease;
+    background: #1dd2af;
+    border-left: 1px solid #1dd2af;
+    cursor: pointer;
+  }
+  .tasker-header button:hover {
+      background: #20a88d;
+  }
+
+  .tasker-header input,button {
+    color: #fff;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    padding: 10px;
+  }
+  #input-task {
+      background-color: #313e50;
+  }
+  
+  .tasker-body .task {
+      display: block;
+      position: relative;
+      padding: 14px 40px 14px 14px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  
+    }
+
+    .tasker-body .task:last-child {
+        border-bottom: none;
+    }
+    .tasker-body .task:hover > button {
+        opacity: 1;
+    }
+    .tasker-body .task.completed {
+        text-decoration: line-through;
+        color: #cdcdcd;
+    }
+    .tasker-body .task input {
+        margin-right: 10px;
+    }
+    .tasker-body .task  button {
+        transition: all 0.5 ease;
+        color: #cdcdcd;
+        margin-right: 14px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0;
+      }
+      .tasker-body .task button:hover {
+        color: #ed1c24;
+      } 
+
+
+/* footer */
+.footer {
+    background-color: #1dd2af;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
 @media screen and (max-width: 1023px) {
     .nav-links {
         width: 60%;
@@ -197,6 +293,11 @@
     }
 }
 @media screen and (max-width: 767px) {
+    .nav-active {
+    
+        transform: translateX(0%);
+        position: fixed;
+    }
     
     body{
         overflow-x: hidden;
@@ -239,63 +340,5 @@
         --columns:1;
     }
 }
-.nav-active {
-    
-    transform: translateX(0%);
-    position: fixed;
-}
 
-/* content using fetch */
-.content {
-    padding: 0 20px 20px 20px;
-    min-height: 200px;
-    background-color: #20e3b2;
-    width: 60%;
-    margin: 0 auto;
-}
 
-#listContent li {
-    list-style-type: none;
-    padding: 20px 0;
-    background-color: aqua;
-    display: flex;
-    justify-content: space-between;
-}
-
-.even {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    min-height: 100px;
-    align-items: center;
-}
-
-#add{
-    padding: 10px;
-    border-radius: 10px;
-    background-color: brown;
-}
-
-.even input {
-    border-radius: 5px;
-    height: 30px;
-    list-style-type: none;
-
-}
-
-.noidung{
-    display: flex;
-    align-items: center;
-    
-}
-.noidung > label {
-    min-width: 50px;
-}
-.date{
-    display: flex;
-    padding: 10px 0;
-}
-.date > label {
-    align-items: center;
-    min-width: 50px;
-}
