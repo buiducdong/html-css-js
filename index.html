@@ -180,20 +180,25 @@
             </div>                                                                                          
         </div>
     </div>
+
     <!-- create to do list app -->
-    <div id="tasker" class="tasker todoApp wide">
-        <div id="error" class="error">Please enter a task</div>
-        <div id="tasker-header" class="tasker-header">
-          <input type="text" id="input-task" placeholder="Enter a task" />
-          <button id="add-task-btn"><i class="fa fa-fw fa-plus"></i>
-          </button>
+    
+    <div class="app">
+        <div class="taskHeader">
+            <h2>To Do List </h2>
+            <div class="input">
+                <input onkeydown="onkeydownInput(event)" id="toDoInput" type="text" placeholder="Title..." />
+                <span onclick="clickAddToDo()" id="addToDo" class="addBtn">Add</span>
+            </div>
         </div>
-        <div class="tasker-body">
-          <ul id="tasks"></ul>
+        <div class="taskBody">
+            <ul id="toDoList">
+
+            </ul>
         </div>
     </div>
 
-
+    
 
     <div class="footer">
         <h1>this is footer</h1>

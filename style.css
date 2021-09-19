@@ -190,90 +190,157 @@
 
 /* todo list app */
 
-.tasker.wide {
-    max-width: 400px;
-    margin: 0 auto;
-    min-height: 200px;
-    background-color: #1dd2af;
-  
-  }
-  #error {
-    display: none;
-    background: rgba(237, 28, 36, 0.7);
-    color: #fff;
-    padding: 14px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.app {
+    height: 100vh;
+    width: 50%;
+    margin: auto;
+    padding: 1rem 0;
+}
+
+.taskHeader {
+    background-color: #22577a;
+    padding: 1rem 2rem;
+    color: white;
     text-align: center;
-  }  
-  .tasker ul {
-    background: #fff;
-  }
+    font-size: 2rem;
+    height: 200px;
+}
 
-  .tasker-header {
-    display: inline-flex;
-    background: #313e50;
-    justify-content: space-between;
-    width: 100%;
-  
-  }
-  .tasker-header input {
-    flex-grow: 2;
-  }
-  .tasker-header button {
-    transition: all 0.4s ease;
-    background: #1dd2af;
-    border-left: 1px solid #1dd2af;
-    cursor: pointer;
-  }
-  .tasker-header button:hover {
-      background: #20a88d;
-  }
+.taskHeader:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
-  .tasker-header input,button {
-    color: #fff;
-    box-sizing: border-box;
-    font-size: 1.25em;
+.taskHeader h2 {
+    margin: 1rem 0;
+}
+
+.taskHeader input {
+    margin: 0;
+    border: none !important;
+    border-radius: 0;
+    width: 75%;
     padding: 10px;
-  }
-  #input-task {
-      background-color: #313e50;
-  }
-  
-  .tasker-body .task {
-      display: block;
-      position: relative;
-      padding: 14px 40px 14px 14px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  
-    }
+    float: left;
+    font-size: 16px;
+}
 
-    .tasker-body .task:last-child {
-        border-bottom: none;
-    }
-    .tasker-body .task:hover > button {
-        opacity: 1;
-    }
-    .tasker-body .task.completed {
-        text-decoration: line-through;
-        color: #cdcdcd;
-    }
-    .tasker-body .task input {
-        margin-right: 10px;
-    }
-    .tasker-body .task  button {
-        transition: all 0.5 ease;
-        color: #cdcdcd;
-        margin-right: 14px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        opacity: 0;
-      }
-      .tasker-body .task button:hover {
-        color: #ed1c24;
-      } 
+.taskHeader input:focus {
+    outline: none;
+}
 
+.taskHeader .addBtn {
+    padding: 10px;
+    width: 25%;
+    background: #9d9d9d;
+    color: #fff;
+    font-weight: 600;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
+
+.taskHeader .addBtn:hover {
+    background-color: #c8c6c6;
+}
+
+.taskBody {
+    height: calc(100% - 220px);
+    overflow-y: auto;
+    /*padding-right: 0.5rem;*/
+    margin: 10px 0;
+}
+
+.taskBody::-webkit-scrollbar {
+    width: 0.5rem;
+}
+.taskBody::-webkit-scrollbar-thumb {
+    background: #11324d;
+    border-radius: 0.5rem;
+}
+.taskBody::-webkit-scrollbar-thumb:hover {
+    background: #6b7aa1;
+}
+
+.taskBody ul {
+    margin: 0;
+    padding: 0;
+}
+
+.taskBody ul li {
+    margin: 0.25rem;
+    cursor: pointer;
+    position: relative;
+    padding: 12px 0;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.taskBody ul li:hover .close {
+    display: flex;
+}
+
+.taskBody ul li:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.taskBody ul li:hover {
+    background: #ddd;
+}
+
+.taskBody ul li.checked .checkedIcon {
+    content: "";
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+.taskBody ul li.checked {
+    background-color: #7f7c82;
+    color: #fff;
+}
+
+.taskBody ul li.checked .label {
+    text-decoration: line-through;
+}
+
+.label {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+
+
+   
 
 /* footer */
 .footer {
@@ -282,7 +349,7 @@
     margin-top: 50px;
 }
 
-
+/*---------------------- sereen ipadpro------------------------------ */
 
 @media screen and (max-width: 1023px) {
     .nav-links {
@@ -291,13 +358,13 @@
     .cards {
        --columns: 2;
     }
-}
-@media screen and (max-width: 767px) {
-    .nav-active {
-    
-        transform: translateX(0%);
-        position: fixed;
+    .app {
+        width: 70%;
     }
+}
+
+/*------------------------- screen ipad-smatphone --------------------*/
+@media screen and (max-width: 767px) {
     
     body{
         overflow-x: hidden;
@@ -338,6 +405,15 @@
     }
     .cards {
         --columns:1;
+    }
+    .nav-active {
+    
+        transform: translateX(0%);
+        position: fixed;
+        transition: transform 0.5s ease-in;
+    }
+    .app{
+        width: calc(100% - 10px);
     }
 }
 

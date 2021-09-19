@@ -27,99 +27,130 @@ navSlide();
 
 // ----------------------to do list app----------------------------
 
-(function() {
-  'use strict';
-  var tasker = {
-    init: function() {
-      this.cacheDom();
-      this.bindEvents();
-      this.evalTasklist();
-    },
-    cacheDom: function() {
-      this.taskInput = document.getElementById("input-task");
-      this.addBtn = document.getElementById("add-task-btn");
-      this.tasklist = document.getElementById("tasks");
-      this.tasklistChildren = this.tasklist.children;
-      this.errorMessage = document.getElementById("error");
-    },
-    bindEvents: function() {
-      this.addBtn.onclick = this.addTask.bind(this);
-      this.taskInput.onkeypress = this.enterKey.bind(this);
-    },
-    evalTasklist: function() {
-      var i, chkBox, delBtn;
-      //BIND CLICK EVENTS TO ELEMENTS
-      for (i = 0; i < this.tasklistChildren.length; i += 1) {
-        //ADD CLICK EVENT TO CHECKBOXES
-        chkBox = this.tasklistChildren[i].getElementsByTagName("input")[0];
-        chkBox.onclick = this.completeTask.bind(this, this.tasklistChildren[i], chkBox);
-        //ADD CLICK EVENT TO DELETE BUTTON
-        delBtn = this.tasklistChildren[i].getElementsByTagName("button")[0];
-        delBtn.onclick = this.delTask.bind(this, i);
-      }
-    },
-    render: function() {
-      var taskLi, taskChkbx, taskVal, taskBtn, taskTrsh;
-      //BUILD HTML
-      taskLi = document.createElement("li");
-      taskLi.setAttribute("class", "task");
-      //CHECKBOX
-      taskChkbx = document.createElement("input");
-      taskChkbx.setAttribute("type", "checkbox");
-      //USER TASK
-      taskVal = document.createTextNode(this.taskInput.value);
-      //DELETE BUTTON
-      taskBtn = document.createElement("button");
-      //TRASH ICON
-      taskTrsh = document.createElement("i");
-      taskTrsh.setAttribute("class", "fa fa-trash");
-      //INSTERT TRASH CAN INTO BUTTON
-      taskBtn.appendChild(taskTrsh);
+const TO_DO_DONE = 'TO_DO_DONE';
+const TO_DO_PROCESSING = 'TO_DO_PROCESSING';
+const LABEL_TO_DO_LIST_STORAGE = 'dataToDoListJavascript';
 
-      //APPEND ELEMENTS TO TASKLI
-      taskLi.appendChild(taskChkbx);
-      taskLi.appendChild(taskVal);
-      taskLi.appendChild(taskBtn);
+let toDoList = [];
 
-      //ADD TASK TO TASK LIST
-      this.tasklist.appendChild(taskLi);
+window.onload = () => {
+    try {
+        const dataToDoList = localStorage.getItem(LABEL_TO_DO_LIST_STORAGE);
+        const dataInitial = JSON.parse(dataToDoList);
+        toDoList = Array.isArray(dataInitial) ? dataInitial : [];
+        console.log(toDoList)
+        toDoList.forEach((toDoItem, index) => {
+            addLiEl(toDoItem);
+        })
+    } catch (e) {
 
-    },
-    completeTask: function(i, chkBox) {
-      if (chkBox.checked) {
-        i.className = "task completed";
-      } else {
-        this.incompleteTask(i);
-      }
-    },
-    incompleteTask: function(i) {
-      i.className = "task";
-    },
-    enterKey: function(event) {
-      if (event.keyCode === 13 || event.which === 13) {
-        this.addTask();
-      }
-    },
-    addTask: function() {
-      var value = this.taskInput.value;
-      this.errorMessage.style.display = "none";
-
-      if (value === "") {
-        this.error();
-      } else {
-        this.render();
-        this.taskInput.value = "";
-        this.evalTasklist();
-      }
-    },
-    delTask: function(i) {
-      this.tasklist.children[i].remove();
-      this.evalTasklist();
-    },
-    error: function() {
-      this.errorMessage.style.display = "block";
     }
-  };
+}
 
-  tasker.init();
-}());
+const onkeydownInput = (event) => {
+    if (event.key === 'Enter') {
+        clickAddToDo();
+    }
+}
+
+const clickAddToDo = () => {
+    const toDoInput = document.getElementById('toDoInput');
+    const toDoText = toDoInput.value;
+    if (toDoText !== '') {
+        const dataToDo = addToDo(toDoText);
+        addLiEl(dataToDo);
+        toDoInput.value = '';
+    }
+}
+
+const addLiEl = (dataToDo) => {
+    const id = dataToDo.id;
+    const toDoText = dataToDo.label;
+    const liEle = document.createElement('li')
+    liEle.setAttribute('id', id.toString());
+    if (dataToDo.status === TO_DO_DONE) {
+        liEle.setAttribute('class', 'checked');
+    }
+    liEle.setAttribute('onclick', `toggleStatusToDo(${id})`)
+
+    // span checkIcon
+    const spanChecked = document.createElement('span');
+    spanChecked.setAttribute('class', 'checkedIcon');
+    liEle.appendChild(spanChecked);
+
+    // span label
+    const spanLabel = document.createElement('span');
+    spanLabel.setAttribute('class', 'label');
+    spanLabel.innerText = toDoText;
+    liEle.appendChild(spanLabel);
+
+    // span label
+    const spanClose = document.createElement('span');
+    spanClose.setAttribute('class', 'close');
+    spanClose.setAttribute('onclick', `clickRemoveToDo(${id})`)
+    spanClose.innerText = '×';
+    liEle.appendChild(spanClose);
+
+    document.getElementById('toDoList').prepend(liEle);
+}
+
+const addToDo = (toDo) => {
+
+    const now = new Date();
+    const dataToDo = {
+        id: now.valueOf(),
+        label: toDo,
+        status: TO_DO_PROCESSING,
+        createdAt: now,
+    };
+    toDoList.push(dataToDo)
+    updateDataLocalStorage(toDoList);
+    return dataToDo;
+}
+
+const clickRemoveToDo = (id) => {
+    const liEle = document.getElementById(id);
+    liEle.remove();
+    removeToDo(id);
+}
+
+const removeToDo = (id) => {
+    toDoList = toDoList.filter((toDoItem, index) => {
+        return toDoItem.id !== id;
+    })
+    updateDataLocalStorage(toDoList);
+}
+
+const toggleStatusToDo = (id) => {
+    const toDoToggle = toDoList.find((toDoItem, index) => {
+        return toDoItem.id === id;
+    })
+    if (toDoToggle) {
+        console.log(toDoToggle)
+        const liEle = document.getElementById(id);
+        if (toDoToggle.status === TO_DO_DONE) {
+            liEle.classList.remove('checked');
+        } else {
+            liEle.classList.add('checked')
+        }
+    }
+    onChangeToDoStatus(id);
+}
+
+const onChangeToDoStatus = (id) => {
+    toDoList = toDoList.map((toDoItem, index) => {
+        if (toDoItem.id === id) {
+            return {
+                ...toDoItem,
+                status: toDoItem.status === TO_DO_DONE ? TO_DO_PROCESSING : TO_DO_DONE
+            }
+        } else {
+            return toDoItem;
+        }
+    })
+    updateDataLocalStorage(toDoList);
+}
+
+const updateDataLocalStorage = (toDoList) => {
+    localStorage.setItem(LABEL_TO_DO_LIST_STORAGE, JSON.stringify(toDoList))
+}
